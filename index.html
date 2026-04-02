@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Vibe Check | Biometric Analysis</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;900&family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="stars-container"></div>
+    
+    <div class="container glass" id="appContainer">
+        <!-- Initial Entry View -->
+        <div id="introView" class="view active">
+            <div class="badge">SECURITY PROTOCOL v2.4</div>
+            <h1 class="title">VIBE <span class="glow-text">CHECK</span></h1>
+            <p class="description">Identity verification required. Place and hold your fingerprint on the scanner below to begin biometric analysis.</p>
+            
+            <div class="scanner-wrapper">
+                <div class="scanner-ring"></div>
+                <div id="scannerZone" class="scanner-target">
+                    <div class="fingerprint-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 12C2 12 5 7 12 7C19 7 22 12 22 12C22 12 19 17 12 17C5 17 2 12 2 12Z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="statusText" class="status-message">AWAITING INPUT...</div>
+            <div class="progress-container">
+                <div id="progressBar" class="progress-fill"></div>
+            </div>
+        </div>
+
+        <!-- Analysis View (Hidden by default) -->
+        <div id="resultView" class="view">
+            <div class="badge success">ANALYSIS COMPLETE</div>
+            <h2 class="result-title">VIBE REPORT</h2>
+            <div class="report-content">
+                <div class="report-line"><span class="label">SUBJECT ID:</span> <span class="value">STUNNING_INDIVIDUAL_01</span></div>
+                <div class="report-line"><span class="label">CHARM LVL:</span> <span class="value glow-text">CRITICAL (100%)</span></div>
+                <div class="report-line"><span class="label">AURA TYPE:</span> <span class="value">IRRESISTIBLE</span></div>
+                
+                <hr class="divider">
+                
+                <p id="finalMessage" class="final-message">
+                    The sensors have confirmed what my eyes already suspected: your presence is nothing short of enchanting. A lady of such grace deserves a proper gentleman by her side. Would you do me the honor of a dinner date?
+                </p>
+            </div>
+            <button onclick="location.reload()" class="btn-reset">Re-Check Vibe</button>
+        </div>
+    </div>
+
+    <!-- Hidden Audio -->
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>

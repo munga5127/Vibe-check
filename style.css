@@ -1,0 +1,267 @@
+:root {
+    --primary-glow: #ff007b;
+    --secondary-glow: #7000ff;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-main: #ffffff;
+    --text-sub: #b0b0b0;
+    --accent: #00ffca;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none; /* Prevent text selection during long press */
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: #050505;
+    color: var(--text-main);
+    font-family: 'Outfit', sans-serif;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.stars-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, #111 0%, #000 100%);
+    overflow: hidden;
+    z-index: -1;
+}
+
+/* Glassmorphism Card */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+    border-radius: 40px;
+}
+
+.container {
+    padding: 40px;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+
+.badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--text-sub);
+    margin-bottom: 24px;
+    border: 1px solid var(--glass-border);
+}
+
+.badge.success {
+    background: rgba(0, 255, 202, 0.1);
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.title {
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: 1;
+    margin-bottom: 12px;
+}
+
+.glow-text {
+    background: linear-gradient(to right, var(--primary-glow), var(--secondary-glow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 8px var(--primary-glow));
+}
+
+.description {
+    font-size: 14px;
+    color: var(--text-sub);
+    line-height: 1.6;
+    margin-bottom: 40px;
+    font-weight: 300;
+}
+
+/* Scanner Zone */
+.scanner-wrapper {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scanner-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.scanner-target {
+    width: 120px;
+    height: 120px;
+    background: #111;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 1);
+}
+
+.scanner-target:active, .scanner-target.active {
+    transform: scale(0.95);
+    box-shadow: 0 0 50px var(--primary-glow);
+    border-color: var(--primary-glow);
+}
+
+.fingerprint-icon {
+    width: 48px;
+    height: 48px;
+    color: var(--text-sub);
+    transition: all 0.3s;
+}
+
+.scanner-target.active .fingerprint-icon {
+    color: var(--primary-glow);
+    filter: drop-shadow(0 0 10px var(--primary-glow));
+    animation: pulse-glow 1s ease infinite;
+}
+
+@keyframes pulse-glow {
+    0% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 0.6; transform: scale(1); }
+}
+
+/* Progress bar */
+.progress-container {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 100px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(to right, var(--primary-glow), var(--secondary-glow));
+    box-shadow: 0 0 10px var(--primary-glow);
+    transition: width 0.1s linear;
+}
+
+.status-message {
+    font-size: 10px;
+    color: var(--text-sub);
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+/* Views management */
+.view {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.view.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Report UI */
+.result-title {
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 30px;
+}
+
+.report-content {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.report-line {
+    font-family: 'Space Grotesk', sans-serif;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.report-line .label {
+    color: var(--text-sub);
+    font-weight: 300;
+}
+
+.report-line .value {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.divider {
+    border: 0;
+    border-top: 1px solid var(--glass-border);
+    margin: 20px 0;
+}
+
+.final-message {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.6;
+    text-align: center;
+    color: #fff;
+    font-style: italic;
+}
+
+.btn-reset {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-main);
+    padding: 12px 30px;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-reset:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
