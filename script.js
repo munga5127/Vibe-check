@@ -12,23 +12,25 @@ document.addEventListener('DOMContentLoaded', () => {
     let scanInterval;
     let musicStarted = false;
 
-    // Mobile audio UNLOCK workaround
-    function unlockAudio() {
-        if (!musicStarted) {
-            bgMusic.play().then(() => {
-                musicStarted = true;
-                // Once unlocked, we can pause it if they haven't started scanning yet, or let it play
-                // If we want it to only play during/after scan, we'll keep it playing since it sets the mood
-            }).catch(err => console.log("Audio blocked waiting for explicit tap:", err));
-            
-            // Remove listeners once unlocked
-            document.removeEventListener('touchstart', unlockAudio);
-            document.removeEventListener('mousedown', unlockAudio);
-        }
-    }
-    
-    document.addEventListener('touchstart', unlockAudio, { once: true });
-    document.addEventListener('mousedown', unlockAudio, { once: true });
+    // Explicit Mobile Audio Unlock
+    const unlockBtn = document.getElementById('unlockBtn');
+    const unlockOverlay = document.getElementById('unlockOverlay');
+
+    unlockBtn.addEventListener('click', () => {
+        bgMusic.play().then(() => {
+            musicStarted = true;
+        }).catch(err => {
+            console.log("Audio blocked despite explicit click:", err);
+            // Some browsers require the promise to resolve, but we'll hide the overlay anyway
+        });
+        
+        // Hide overlay smoothly
+        unlockOverlay.style.opacity = '0';
+        unlockOverlay.style.transition = 'opacity 0.5s ease';
+        setTimeout(() => {
+            unlockOverlay.style.display = 'none';
+        }, 500);
+    });
 
     const messages = [
         "Initializing scan...",

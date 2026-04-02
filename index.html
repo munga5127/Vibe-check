@@ -10,6 +10,13 @@
 <body>
     <div class="stars-container"></div>
     
+    <!-- Audio Unlock Overlay -->
+    <div id="unlockOverlay" style="position: absolute; inset: 0; z-index: 1000; backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; flex-direction: column; background: rgba(0,0,0,0.85); text-align: center;">
+        <h2 style="font-size: 24px; font-weight: 900; letter-spacing: 2px; margin-bottom: 20px; color: #fff;">SYSTEM STANDBY</h2>
+        <p style="color: #b0b0b0; font-size: 12px; margin-bottom: 30px; max-width: 80%;">Touch interaction required to activate biometrics and audio modules.</p>
+        <button id="unlockBtn" class="btn-reset" style="font-size: 14px; padding: 15px 40px; border-color: #00ffca; color: #00ffca; text-transform: uppercase;">Tap to Initialize</button>
+    </div>
+
     <div class="container glass" id="appContainer">
         <!-- Initial Entry View -->
         <div id="introView" class="view active">
